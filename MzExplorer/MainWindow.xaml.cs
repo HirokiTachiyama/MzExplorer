@@ -9,6 +9,10 @@ namespace MzExplorer
 {
     public partial class MainWindow : Window
     {
+        public static string MzProjectFilePath = string.Empty;
+        public static string MzProjectDirectory = string.Empty;
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -17,12 +21,15 @@ namespace MzExplorer
             BuildInfoTextBlock.Text = $"MzExplorer Version: v{version}.{BuildInfo.BuildCount} / Build: {BuildInfo.BuildDateTime}";
         }
 
-        private void SelectFileButton_Click(object sender, RoutedEventArgs e)
+        private void SelectMZProject_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog();
+            dialog.Filter = "RPG Maker MZ Project File (*.rpgproject)|*.rpgproject";
             if (dialog.ShowDialog() == true)
             {
-                SelectedFileNameTextBlock.Text = System.IO.Path.GetFileName(dialog.FileName);
+                MzProjectFilePath = dialog.FileName;
+                MzProjectDirectory = System.IO.Path.GetDirectoryName(MzProjectFilePath) ?? string.Empty;
+                SelectedFileNameTextBlock.Text = MzProjectDirectory;
             }
         }
 

@@ -8,7 +8,14 @@
         Title="MainWindow" Height="450" Width="800">
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-            <Button Content="メニュー"/>
+            <Menu>
+                <MenuItem Header="メニュー">
+                    <MenuItem Header="MZプロジェクトを選択" Click="SelectMZProject_Click"/>
+                    <Separator/>
+                    <MenuItem Header="終了"/>
+                </MenuItem>
+            </Menu>
+            <TextBlock Name="SelectedFileNameTextBlock" Text="MZのプロジェクトファイルが選択されていません" />
         </StackPanel>
         <Border DockPanel.Dock="Bottom" Background="#EEE" Padding="6,2">
             <TextBlock x:Name="BuildInfoTextBlock"
@@ -23,15 +30,15 @@
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center">
                     <StackPanel Margin="10">
-                        <Button Name="SelectFileButton" Content="ファイルを選択" Width="120" Margin="0,0,0,10" Click="SelectFileButton_Click"/>
-                        <TextBlock Name="SelectedFileNameTextBlock" Text="ファイルが選択されていません" />
+                        <Button Name="SelectFileButton" Content="ファイルを選択" Width="120" Margin="0,0,0,10" Click="SelectMZProject_Click"/>
+                        
                     </StackPanel>
-                    <TextBlock FontSize="16" Text="フォルダ名" />
+                    <TextBlock FontSize="16" Text="プロジェクト名、マップ数、マップ名の一覧・・MZでできない解析や可視化を行う" />
                 </StackPanel>
 
             </TabItem>
             <TabItem Header="json解析">
-                <TextBlock Text="JSON解析タブの内容"
+                <TextBlock Text="MapデータJSONを解析する"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
                            FontSize="16"/>
