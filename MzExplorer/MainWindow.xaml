@@ -1,0 +1,45 @@
+﻿<Window x:Class="MzExplorer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MzExplorer"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <Button Content="メニュー"/>
+        </StackPanel>
+        <Border DockPanel.Dock="Bottom" Background="#EEE" Padding="6,2">
+            <TextBlock x:Name="BuildInfoTextBlock"
+                       HorizontalAlignment="Right"
+                       FontSize="12"
+                       Foreground="Gray"/>
+        </Border>
+
+        <TabControl>
+            <TabItem Header="overview">
+                <StackPanel 
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+                    <StackPanel Margin="10">
+                        <Button Name="SelectFileButton" Content="ファイルを選択" Width="120" Margin="0,0,0,10" Click="SelectFileButton_Click"/>
+                        <TextBlock Name="SelectedFileNameTextBlock" Text="ファイルが選択されていません" />
+                    </StackPanel>
+                    <TextBlock FontSize="16" Text="フォルダ名" />
+                </StackPanel>
+
+            </TabItem>
+            <TabItem Header="json解析">
+                <TextBlock Text="JSON解析タブの内容"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontSize="16"/>
+            </TabItem>
+        </TabControl>
+
+    </DockPanel>
+    
+    
+
+</Window>

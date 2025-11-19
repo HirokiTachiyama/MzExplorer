@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <BuildDateTime>$([System.DateTime]::Now.ToString("yyyyMMdd.HH:mm:ss"))</BuildDateTime>
+	<BuildCounterFile>Properties\BuildCounter.txt</BuildCounterFile>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+  </PropertyGroup>
+	
+  <Target Name="Update" AfterTargets="Compile">
+	  <ReadLinesFromFile File="$(BuildCounterFile)">
+		  <Output TaskParameter="Lines" ItemName="CounterLines" />
+	  </ReadLinesFromFile>
+	  <PropertyGroup>
+		  <CurrentBuildCount>
+			  $([System.Int32]::Parse('%(CounterLines.Identity)'))
+		  </CurrentBuildCount>
+	  </PropertyGroup>
+	  <WriteLinesToFile File="$(BuildCounterFile)" Lines="$(CurrentBuildCount)" Overwrite="true" />
+
+	  <WriteLinesToFile File="Properties\BuildInfo.g.cs" Lines="namespace MzExplorer.Properties { internal static class BuildInfo { public const int BuildCount = $(CurrentBuildCount); %3B public const string BuildDateTime = &quot;$(BuildDateTime)&quot;%3B } }" Overwrite="true" />
+    <ItemGroup>
+      <Compile Include="Properties\BuildInfo.g.cs" />
+    </ItemGroup>
+  </Target>
+</Project>
+
